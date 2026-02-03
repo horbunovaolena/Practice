@@ -13,7 +13,7 @@ Console.WriteLine("Будь ласка, введіть тип виробу(Од�
 while (true)
 {
     string? input = Console.ReadLine()?.Trim().Replace(" ", "");
-    if (!string.IsNullOrWhiteSpace(input))
+    if (!string.IsNullOrEmpty(input))
     {
         input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
 
@@ -26,13 +26,14 @@ while (true)
     Console.WriteLine("Будь ласка, введіть коректний тип виробу(Одяг/Посуд/Інше): ");
 }
 
+
 //Введення матеріалу:
 Console.WriteLine("Будь ласка, введіть назву матеріалу(Льон/Глина/Пластик/Інше): ");
 string Material;
 while (true)
 {
     string? input = Console.ReadLine()?.Trim().Replace(" ", "");
-    if (!string.IsNullOrWhiteSpace(input))
+    if (!string.IsNullOrEmpty(input))
     {
         input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
         if (input == "Льон" || input == "Глина" || input == "Пластик" || input == "Інше")
@@ -50,7 +51,7 @@ string Region;
 while (true)
 {
     string? input = Console.ReadLine()?.Trim().Replace(" ", "");
-    if (!string.IsNullOrWhiteSpace(input))
+    if (!string.IsNullOrEmpty(input))
     {
         input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
         if (input == "Полтава" || input == "Гуцульщина" || input == "Сучасний" || input == "Інше")
@@ -67,7 +68,7 @@ string technique = Region switch
     "Полтава" => "Вишивка біллю (білим по білому)",
     "Гуцульщина" => "Низинка або кучерявий шов",
     "Сучасний" => "Машинна вишивка або принт",
-    "Інше" => "Техніка обирається майстром"
+            _ => "Техніка обирається майстром"
 };
 
 // Встановлення дедлайну:
