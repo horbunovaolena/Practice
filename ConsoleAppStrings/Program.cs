@@ -38,7 +38,7 @@ Console.WriteLine($"Дякуємо! Ви зареєстрували виріб �
 //3.Обробка опису товару
 Console.WriteLine("Введіть опис товару:");
 string description = Console.ReadLine()?.Trim() ?? "";
-string replacedDescription = description.Replace("пластик", "еко-матеріал", StringComparison.OrdinalIgnoreCase);   
+string replacedDescription = description.Replace("пластик", "еко-матеріал", StringComparison.OrdinalIgnoreCase); //або rawDescription.Trim()
 Console.WriteLine("Оновлений опис товару:");
 Console.WriteLine(replacedDescription);
 
