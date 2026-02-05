@@ -1,0 +1,15 @@
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\bin\Debug\net10.0\Task2_Strings.exe
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\bin\Debug\net10.0\Task2_Strings.deps.json
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\bin\Debug\net10.0\Task2_Strings.runtimeconfig.json
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\bin\Debug\net10.0\Task2_Strings.dll
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\bin\Debug\net10.0\Task2_Strings.pdb
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.AssemblyInfoInputs.cache
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.AssemblyInfo.cs
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.csproj.CoreCompileInputs.cache
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.sourcelink.json
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.dll
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\refint\Task2_Strings.dll
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.pdb
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\Task2_Strings.genruntimeconfig.cache
+C:\Users\horbu\source\repos\Practice\ConsoleAppStrings\obj\Debug\net10.0\ref\Task2_Strings.dll

@@ -1,0 +1,51 @@
+﻿
+//Практична задача: Аналізатор товарних бирок
+
+// 1. Валідація артикула.
+string article = "";
+
+while (true)
+{
+    Console.WriteLine("Введіть артикул товару в форматі: ETHNO-XX-YYYY");
+    article = Console.ReadLine()?.Replace(" ", "").ToUpper() ?? ""; 
+    
+    if (string.IsNullOrWhiteSpace(article))
+    {
+        Console.WriteLine("❌ Помилка: Ви нічого не ввели.");
+    }
+    else if (article.Length != 13)
+    {
+        Console.WriteLine("❌ Помилка:Артикул повинен містити рівно 13 символів.");
+    }
+    else if (!article.StartsWith("ETHNO-"))
+    {
+        Console.WriteLine("❌ Помилка: Артикул повинен починатися з 'ETHNO-'.");
+    }
+    else
+    {
+        Console.WriteLine("Артикул прийнятий.");
+        break;
+    }
+    Console.WriteLine("Будь ласка, спробуйте ще раз.");
+}
+
+// 2. Розшифровка коду
+string[] parts = article.Split('-');
+string categoryCode = parts[1];
+string yearCode = parts[2];
+Console.WriteLine($"Дякуємо! Ви зареєстрували виріб категорії {categoryCode} за {yearCode}  рік.");
+
+//3.Обробка опису товару
+Console.WriteLine("Введіть опис товару:");
+string description = Console.ReadLine()?.Trim() ?? "";
+string replacedDescription = description.Replace("пластик", "еко-матеріал", StringComparison.OrdinalIgnoreCase);   
+Console.WriteLine("Оновлений опис товару:");
+Console.WriteLine(replacedDescription);
+
+//4.Контроль безпеки
+string lowerDescription = replacedDescription.ToLower();
+if (lowerDescription.Contains("золото") || lowerDescription.Contains("срібло"))
+{
+    Console.WriteLine("🔔 Увага! Товар містить дорогоцінні метали. Потрібне додаткове страхування.");
+}
+
