@@ -3,23 +3,25 @@
 
 // 1. Валідація артикула.
 string article = "";
+const string requiredPrefix = "ETHNO-";
+const int requiredLength = 13;
 
 while (true)
 {
-    Console.WriteLine("Введіть артикул товару в форматі: ETHNO-XX-YYYY");
+    Console.WriteLine($"Введіть артикул товару в форматі: {requiredPrefix}XX-YYYY");
     article = Console.ReadLine()?.Replace(" ", "").ToUpper() ?? ""; 
     
     if (string.IsNullOrWhiteSpace(article))
     {
         Console.WriteLine("❌ Помилка: Ви нічого не ввели.");
     }
-    else if (article.Length != 13)
+    else if (article.Length != requiredLength)
     {
-        Console.WriteLine("❌ Помилка:Артикул повинен містити рівно 13 символів.");
+        Console.WriteLine($"❌ Помилка: Артикул повинен містити рівно {requiredLength} символів.");
     }
-    else if (!article.StartsWith("ETHNO-"))
+    else if (!article.StartsWith(requiredPrefix))
     {
-        Console.WriteLine("❌ Помилка: Артикул повинен починатися з 'ETHNO-'.");
+        Console.WriteLine($"❌ Помилка: Артикул повинен починатися з '{requiredPrefix}'.");
     }
     else
     {
