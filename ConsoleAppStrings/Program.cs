@@ -1,7 +1,8 @@
 ﻿
-//Практична задача: Аналізатор товарних бирок
+// Практична задача: Аналізатор товарних бирок
 
 // 1. Валідація артикула.
+
 string article = "";
 const string requiredPrefix = "ETHNO-";
 const int requiredLength = 13;
@@ -32,19 +33,22 @@ while (true)
 }
 
 // 2. Розшифровка коду
+
 string[] parts = article.Split('-');
 string categoryCode = parts[1];
 string yearCode = parts[2];
 Console.WriteLine($"Дякуємо! Ви зареєстрували виріб категорії {categoryCode} за {yearCode}  рік.");
 
-//3.Обробка опису товару
+//3. Обробка опису товару
+
 Console.WriteLine("Введіть опис товару:");
 string description = Console.ReadLine()?.Trim() ?? "";
 string replacedDescription = description.Replace("пластик", "еко-матеріал", StringComparison.OrdinalIgnoreCase); //або rawDescription.Trim()
 Console.WriteLine("Оновлений опис товару:");
 Console.WriteLine(replacedDescription);
 
-//4.Контроль безпеки
+//4. Контроль безпеки
+
 string lowerDescription = replacedDescription.ToLower();
 if (lowerDescription.Contains("золото") || lowerDescription.Contains("срібло"))
 {

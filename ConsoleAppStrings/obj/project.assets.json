@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\horbu\\source\\repos\\Practice\\ConsoleAppStrings\\Task2_Strings.csproj",
-      "projectName": "Task2_Strings",
-      "projectPath": "C:\\Users\\horbu\\source\\repos\\Practice\\ConsoleAppStrings\\Task2_Strings.csproj",
+      "projectUniqueName": "C:\\Users\\horbu\\source\\repos\\Practice\\ConsoleAppStrings\\Task2_TagAnalyzer.csproj",
+      "projectName": "Task2_TagAnalyzer",
+      "projectPath": "C:\\Users\\horbu\\source\\repos\\Practice\\ConsoleAppStrings\\Task2_TagAnalyzer.csproj",
       "packagesPath": "C:\\Users\\horbu\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\horbu\\source\\repos\\Practice\\ConsoleAppStrings\\obj\\",
       "projectStyle": "PackageReference",
