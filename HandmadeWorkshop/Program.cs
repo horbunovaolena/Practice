@@ -4,11 +4,13 @@
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 Console.InputEncoding = System.Text.Encoding.UTF8;
 
-//Привітання:
+// Привітання:
+
 string ItemType;
 Console.WriteLine("Вітаємо в асистенті майстерні! Давайте оформимо ваше замовлення");
 
-//Введення категорії: 
+// Введення категорії:
+
 Console.WriteLine("Будь ласка, введіть тип виробу(Одяг/Посуд/Інше): ");
 while (true)
 {
@@ -23,11 +25,13 @@ while (true)
             break;
         }
     }
+
     Console.WriteLine("Будь ласка, введіть коректний тип виробу(Одяг/Посуд/Інше): ");
 }
 
 
-//Введення матеріалу:
+// Введення матеріалу:
+
 Console.WriteLine("Будь ласка, введіть назву матеріалу(Льон/Глина/Пластик/Інше): ");
 string Material;
 while (true)
@@ -45,7 +49,8 @@ while (true)
     Console.WriteLine("Будь ласка, введіть коректну назву матеріалу(Льон/Глина/Пластик/Інше): ");
 }
 
-//Вибір локації: 
+// Вибір локації: 
+
 Console.WriteLine("Будь ласка, введіть для якого регіону виконується робота(Полтава/Гуцульщина/Сучасний/Інше): ");
 string Region;
 while (true)
@@ -62,7 +67,9 @@ while (true)
     }
     Console.WriteLine("Будь ласка, введіть коректно для якого регіону виконується робота(Полтава/Гуцульщина/Сучасний/Інше): ");
 }
-//Вибір техніки декору
+
+// Вибір техніки декору:
+
 string technique = Region switch
 {
     "Полтава" => "Вишивка біллю (білим по білому)",
@@ -72,6 +79,7 @@ string technique = Region switch
 };
 
 // Встановлення дедлайну:
+
 Console.WriteLine("Які строки виконання роботи? Введіть кількість днів: ");
 int Days;
 while (!int.TryParse(Console.ReadLine(), out Days) || Days <= 0)
@@ -80,15 +88,25 @@ while (!int.TryParse(Console.ReadLine(), out Days) || Days <= 0)
 }
 string status = Days < 3 ? "Терміново" : "Звичайно";
 
-//Отримання результату: 
-Console.WriteLine($"Ваше замовлення:Тип виробу: {ItemType}, Матеріал: {Material}, Регіон: {Region} ,Техніка виконання: {technique}, Строки виконання: {Days} днів ");
+// Отримання результату:
 
-//Класифікатор виробу: 
+Console.WriteLine($"Ваше замовлення: Тип виробу: {ItemType}, Матеріал: {Material}, Регіон: {Region} ,Техніка виконання: {technique}, Строки виконання: {Days} днів ");
+
+// Класифікатор виробу: 
+
 if (ItemType == "Одяг" && Material == "Льон")
+{
     Console.WriteLine("Це автентичний одяг(старовинний стиль).");
+}
 else if (ItemType == "Одяг" && Material != "Льон")
+{
     Console.WriteLine("Це сучасний текстильний виріб.");
+}
 else if (ItemType == "Посуд" && Material == "Глина")
+{
     Console.WriteLine("Це кераміка ручної роботи");
+}
 else
+{
     Console.WriteLine("Категорія для хендмейду не визначена");
+}

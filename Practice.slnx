@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="HandmadeWorkshop/HandmadeWorkshop.csproj" Id="ebe1f29d-083c-4b38-b685-3ab4ee9b50a5" />
+  <Project Path="ConsoleAppStrings/Task2_TagAnalyzer.csproj" Id="8c98d5a5-9a3e-4e55-b032-e6dcef3bba50" />
+  <Project Path="HandmadeWorkshop/Task1_HandmadeWorkshop.csproj" Id="ebe1f29d-083c-4b38-b685-3ab4ee9b50a5" />
+  <Project Path="Practical task.Accounting/Task3_Accounting.csproj" Id="0e191e1c-448f-492a-9bd5-847cd7a837b7" />
 </Solution>
