@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="Task1_HandmadeWorkshop/Task1_HandmadeWorkshop.csproj" />
   <Project Path="Task2_TagAnalyzer/Task2_TagAnalyzer.csproj" />
-  <Project Path="Task4_ShoppingList/Task4_ShoppingList.csproj" Id="239e05fd-120d-4e43-a2a5-131fade4333f" />
-  <Project Path="Task5_Dictionary/Task5_Dictionary.csproj" Id="199c9e9f-3419-482f-b09e-9941b7ade1ed" />
+  <Project Path="Task3_Accounting/Task3_Accounting.csproj" Id="fe373051-ae4b-4620-b29a-ce2198d21f43" />
+  <Project Path="Task4_ShoppingList/Task4_ShoppingList.csproj" />
+  <Project Path="Task5_Dictionary/Task5_Dictionary.csproj" />
 </Solution>
