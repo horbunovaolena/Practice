@@ -2,4 +2,5 @@
   <Project Path="ConsoleApp1/Task_3_Accounting.csproj" Id="df78ad26-a1e9-4f68-a538-b1712a6016c0" />
   <Project Path="ConsoleAppStrings/Task2_TagAnalyzer.csproj" Id="8c98d5a5-9a3e-4e55-b032-e6dcef3bba50" />
   <Project Path="HandmadeWorkshop/Task1_HandmadeWorkshop.csproj" Id="ebe1f29d-083c-4b38-b685-3ab4ee9b50a5" />
+  <Project Path="Task4_ShoppingList/Task4_ShoppingList.csproj" Id="239e05fd-120d-4e43-a2a5-131fade4333f" />
 </Solution>
