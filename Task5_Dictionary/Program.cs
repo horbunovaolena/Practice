@@ -1,6 +1,6 @@
 ﻿//Створити словник , який містить назви товарів та їх ціни.Заповнити кількома товарами,цінами.
 // Додаємо ігнорування регістру прямо при створенні словника
-var prices = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+var productsPrices = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
 {
     {"вишиванка", 2500},
     {"спідниця", 1500},
@@ -28,7 +28,7 @@ Console.WriteLine("\n--- ВАШ ЧЕК ---");
 int totalOrderPrice = 0;
 foreach (var item in shoppingList)
 {
-    if (prices.TryGetValue(item, out int price)) 
+    if (productsPrices.TryGetValue(item, out int price)) 
     {
         totalOrderPrice += price;
         Console.WriteLine($"{item} | {price} грн.");
