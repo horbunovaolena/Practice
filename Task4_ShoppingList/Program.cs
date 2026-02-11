@@ -4,7 +4,7 @@
 
         while (true)
         {
-            Console.WriteLine("Введіть назви товарів.В разі завершення дії введіть 'stop': ");
+            Console.WriteLine("Введіть назви товарів. В разі завершення дії введіть 'stop': ");
             string? input = Console.ReadLine()?.Trim();
     
             if (input == "stop") break;
