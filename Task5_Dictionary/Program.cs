@@ -1,5 +1,6 @@
-﻿//Створити словник , який містить назви товарів та їх ціни.Заповнити кількома товарами,цінами.
+﻿// Створити словник , який містить назви товарів та їх ціни.Заповнити кількома товарами,цінами.
 // Додаємо ігнорування регістру прямо при створенні словника
+
 var productsPrices = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
 {
     {"вишиванка", 2500},
@@ -7,8 +8,9 @@ var productsPrices = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCas
     {"пояс", 500}
 };
 
-//Користувач вводить назву товару, а програма виводить його ціну.
-//Якщо товару немає в словнику, вивести повідомлення про це.
+// Користувач вводить назву товару, а програма виводить його ціну.
+// Якщо товару немає в словнику, вивести повідомлення про це.
+
 var shoppingList = new List<string>();
 
 while (true)
@@ -22,14 +24,16 @@ while (true)
         Console.WriteLine("Ви не ввели назву товару. Спробуйте ще раз.");
 }
 
-// Виводимо ціну кожного товару зі списку покупок.
+// Виводимо ціну кожного товару зі списку покупок.Та загальну суму замовлення.
 // TryGetValue — це безпечний спосіб отримати значення зі словника за ключем.
+
 Console.WriteLine("\n--- ВАШ ЧЕК ---");
 int totalOrderPrice = 0;
 foreach (var item in shoppingList)
 {
     if (productsPrices.TryGetValue(item, out int price)) 
     {
+        int finalItemPrice = GetDiscountedPrice(price);
         totalOrderPrice += price;
         Console.WriteLine($"{item} | {price} грн.");
     }

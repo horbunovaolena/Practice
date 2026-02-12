@@ -1,4 +1,5 @@
-﻿// Списки (List) "Динамічний список покупок"
+﻿// Списки (List) "Динамічний список покупок":
+
 var shoppingList = new List<string>();
 
 while (true)
