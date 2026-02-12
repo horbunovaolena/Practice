@@ -33,7 +33,6 @@ foreach (var item in shoppingList)
 {
     if (productsPrices.TryGetValue(item, out int price)) 
     {
-        int finalItemPrice = GetDiscountedPrice(price);
         totalOrderPrice += price;
         Console.WriteLine($"{item} | {price} грн.");
     }
@@ -44,3 +43,11 @@ foreach (var item in shoppingList)
 }
 Console.WriteLine("-------------------------------");
 Console.WriteLine($"ЗАГАЛОМ: {totalOrderPrice} грн.");
+Console.WriteLine($"ЗАГАЛОМ ЗІ ЗНИЖКОЮ: {GetDiscountedPrice(totalOrderPrice)} грн.");
+static int GetDiscountedPrice(int price)
+{
+    if (price > 2000)
+        return (int)(price * 0.9);
+
+    return price;
+}
