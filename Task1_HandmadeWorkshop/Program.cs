@@ -5,68 +5,26 @@ Console.InputEncoding = System.Text.Encoding.UTF8;
 // Твій новий метод привітання :
 ShowLogo();
 
-// Привітання:
-string ItemType;
-Console.WriteLine("Вітаємо в асистенті майстерні! Давайте оформимо ваше замовлення");
+// 1. Отримуємо Тип
+string itemType = GetValidInput(
+    "Будь ласка, введіть тип виробу (Одяг/Посуд/Інше):",
+    new[] { "Одяг", "Посуд", "Інше" }
+);
 
-// Введення категорії:
-Console.WriteLine("Будь ласка, введіть тип виробу(Одяг/Посуд/Інше): ");
-while (true)
-{
-    string? input = Console.ReadLine()?.Trim().Replace(" ", "");
-    if (!string.IsNullOrEmpty(input))
-    {
-        input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
+// 2. Отримуємо Матеріал
+string material = GetValidInput(
+    "Будь ласка, введіть назву матеріалу (Льон/Глина/Пластик/Інше):",
+    new[] { "Льон", "Глина", "Пластик", "Інше" }
+);
 
-        if (input == "Одяг" || input == "Посуд" || input == "Інше")
-        {
-            ItemType = input;
-            break;
-        }
-    }
-
-    Console.WriteLine("Будь ласка, введіть коректний тип виробу(Одяг/Посуд/Інше): ");
-}
-
-
-// Введення матеріалу:
-Console.WriteLine("Будь ласка, введіть назву матеріалу(Льон/Глина/Пластик/Інше): ");
-string Material;
-while (true)
-{
-    string? input = Console.ReadLine()?.Trim().Replace(" ", "");
-    if (!string.IsNullOrEmpty(input))
-    {
-        input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
-        if (input == "Льон" || input == "Глина" || input == "Пластик" || input == "Інше")
-        {
-            Material = input;
-            break;
-        }
-    }
-    Console.WriteLine("Будь ласка, введіть коректну назву матеріалу(Льон/Глина/Пластик/Інше): ");
-}
-
-// Вибір локації: 
-Console.WriteLine("Будь ласка, введіть для якого регіону виконується робота(Полтава/Гуцульщина/Сучасний/Інше): ");
-string Region;
-while (true)
-{
-    string? input = Console.ReadLine()?.Trim().Replace(" ", "");
-    if (!string.IsNullOrEmpty(input))
-    {
-        input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
-        if (input == "Полтава" || input == "Гуцульщина" || input == "Сучасний" || input == "Інше")
-        {
-            Region = input;
-            break;
-        }
-    }
-    Console.WriteLine("Будь ласка, введіть коректно для якого регіону виконується робота(Полтава/Гуцульщина/Сучасний/Інше): ");
-}
+// 3. Отримуємо Регіон
+string region = GetValidInput(
+    "Будь ласка, введіть регіон (Полтава/Гуцульщина/Сучасний/Інше):",
+    new[] { "Полтава", "Гуцульщина", "Сучасний", "Інше" }
+);
 
 // Вибір техніки декору:
-string technique = Region switch
+string technique = region switch
 {
     "Полтава" => "Вишивка біллю (білим по білому)",
     "Гуцульщина" => "Низинка або кучерявий шов",
@@ -84,18 +42,18 @@ while (!int.TryParse(Console.ReadLine(), out Days) || Days <= 0)
 string status = Days < 3 ? "Терміново" : "Звичайно";
 
 // Отримання результату:
-Console.WriteLine($"Ваше замовлення: Тип виробу: {ItemType}, Матеріал: {Material}, Регіон: {Region} ,Техніка виконання: {technique}, Строки виконання: {Days} днів ");
+Console.WriteLine($"Ваше замовлення: Тип виробу: {itemType}, Матеріал: {material}, Регіон: {region} ,Техніка виконання: {technique}, Строки виконання: {Days} днів ");
 
 // Класифікатор виробу: 
-if (ItemType == "Одяг" && Material == "Льон")
+if (itemType == "Одяг" && material == "Льон")
 {
     Console.WriteLine("Це автентичний одяг(старовинний стиль).");
 }
-else if (ItemType == "Одяг" && Material != "Льон")
+else if (itemType == "Одяг" && material != "Льон")
 {
     Console.WriteLine("Це сучасний текстильний виріб.");
 }
-else if (ItemType == "Посуд" && Material == "Глина")
+else if (itemType == "Посуд" && material == "Глина")
 {
     Console.WriteLine("Це кераміка ручної роботи");
 }
@@ -108,4 +66,30 @@ else
 static void ShowLogo()
 {
     Console.WriteLine("=== ETNO-STYLE WORKSHOP ===");
+}
+
+static string GetValidInput(string prompt, string[] validOptions)
+{
+    while (true)
+    {
+        Console.WriteLine(prompt);
+        string? input = Console.ReadLine()?.Trim().Replace(" ", "");
+
+        // Додаємо перевірку: якщо рядок порожній, не йдемо далі
+        if (string.IsNullOrEmpty(input))
+        {
+            Console.WriteLine("❌ Ви нічого не ввели. Спробуйте ще раз.");
+            continue; // Повертаємося на початок циклу
+        }
+
+        // Тепер це безпечно, бо ми точно знаємо, що там є хоча б один символ
+        input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
+
+        foreach (string option in validOptions)
+        {
+            if (input == option) return input;
+        }
+
+        Console.WriteLine("❌ Помилка. Оберіть варіант зі списку.");
+    }
 }
