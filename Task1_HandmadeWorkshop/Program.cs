@@ -49,7 +49,7 @@ if (itemType == "Одяг" && material == "Льон")
 {
     Console.WriteLine("Це автентичний одяг(старовинний стиль).");
 }
-else if (itemType == "Одяг" &&  material != "Льон")
+else if (itemType == "Одяг" && material != "Льон")
 {
     Console.WriteLine("Це сучасний текстильний виріб.");
 }
