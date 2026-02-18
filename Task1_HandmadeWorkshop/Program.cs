@@ -90,14 +90,14 @@ static string GetValidInput(string prompt, string[] validOptions)
 
 static int GetValidInt(string prompt, int min, int max)
 {
-    if (min>max)
+    if (min > max)
     {
         throw new ArgumentException("Мінімальне значення не може бути більшим за максимальне!");
     }
     while (true)
     {
         Console.WriteLine(prompt);
-        string? input = Console.ReadLine().Trim();
+        string? input = Console.ReadLine()?.Trim();
 
         if (int.TryParse(input, out int result))
         {
