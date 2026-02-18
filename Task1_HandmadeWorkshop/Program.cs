@@ -5,19 +5,19 @@ Console.InputEncoding = System.Text.Encoding.UTF8;
 // Твій новий метод привітання :
 ShowLogo();
 
-// 1. Отримуємо Тип
+//  Отримуємо Тип:
 string itemType = GetValidInput(
     "Будь ласка, введіть тип виробу (Одяг/Посуд/Інше):",
     new[] { "Одяг", "Посуд", "Інше" }
 );
 
-// 2. Отримуємо Матеріал
+//  Отримуємо Матеріал:
 string material = GetValidInput(
     "Будь ласка, введіть назву матеріалу (Льон/Глина/Пластик/Інше):",
     new[] { "Льон", "Глина", "Пластик", "Інше" }
 );
 
-// 3. Отримуємо Регіон
+//  Отримуємо Регіон:
 string region = GetValidInput(
     "Будь ласка, введіть регіон (Полтава/Гуцульщина/Сучасний/Інше):",
     new[] { "Полтава", "Гуцульщина", "Сучасний", "Інше" }
@@ -33,13 +33,7 @@ string technique = region switch
 };
 
 // Встановлення дедлайну:
-Console.WriteLine("Які строки виконання роботи? Введіть кількість днів: ");
-int Days;
-while (!int.TryParse(Console.ReadLine(), out Days) || Days <= 0)
-{
-    Console.WriteLine("Будь ласка, введіть коректну кількість днів(позитивне ціле число): ");
-}
-string status = Days < 3 ? "Терміново" : "Звичайно";
+int Days = GetValidInt("Які строки виконання роботи? Введіть кількість днів: ",1,365);
 
 // Отримання результату:
 Console.WriteLine($"Ваше замовлення: Тип виробу: {itemType}, Матеріал: {material}, Регіон: {region} ,Техніка виконання: {technique}, Строки виконання: {Days} днів ");
@@ -91,5 +85,34 @@ static string GetValidInput(string prompt, string[] validOptions)
         }
 
         Console.WriteLine("❌ Помилка. Оберіть варіант зі списку.");
+    }
+}
+
+static int GetValidInt(string prompt, int min, int max)
+{
+    if (min>max)
+    {
+        throw new ArgumentException("Мінімальне значення не може бути більшим за максимальне!");
+    }
+    while (true)
+    {
+        Console.WriteLine(prompt);
+        string? input = Console.ReadLine().Trim();
+
+        if (int.TryParse(input, out int result))
+        {
+            if (result >= min && result <= max)
+            {
+                return result; 
+            }
+            else
+            {
+                Console.WriteLine($"❌ Помилка: введіть число в межах від {min} до {max}.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("❌ Це не число. Спробуйте ще раз.");
+        }
     }
 }

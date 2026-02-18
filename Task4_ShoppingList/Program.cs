@@ -26,3 +26,5 @@ if (shoppingList.Count > 0)
     Console.WriteLine("Перше замовлення пішло в роботу.");
 }
 
+
+
