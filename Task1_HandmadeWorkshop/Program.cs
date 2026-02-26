@@ -1,4 +1,7 @@
-﻿// 🧵інтерактивний консольний додаток для майстрів хендмейду.
+﻿// Program.cs
+using Task1_HandmadeWorkshop;
+
+// 🧵інтерактивний консольний додаток для майстрів хендмейду.
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 Console.InputEncoding = System.Text.Encoding.UTF8;
 
@@ -23,15 +26,16 @@ int days = GetValidInt("Які строки виконання роботи? В�
 
 Order myOrder = new Order(itemType, material, region, days, 2500m);
 
-myOrder.DisplayInfo();
+Console.WriteLine(myOrder);
 
-// --- МІСЦЕ ДЛЯ ТВОЇХ МЕТОДІВ (поза Main) ---
+// --- МЕТОДИ ---
 static void ShowLogo()
 {
     Console.WriteLine("╔═══════════════════════════════════════╗");
     Console.WriteLine("║    ETNO-STYLE WORKSHOP 🧵             ║");
     Console.WriteLine("╚═══════════════════════════════════════╝\n");
 }
+
 static string GetValidInput(string prompt, string[] validOptions)
 {
     while (true)
@@ -82,63 +86,5 @@ static int GetValidInt(string prompt, int min, int max)
         {
             Console.WriteLine("❌ Це не число. Спробуйте ще раз.");
         }
-    }
-}
-public class Order
-{
-    public string ItemType { get; set; }
-    public string Material { get; set; }
-    public string Region { get; set; }
-    public int Days { get; set; }
-    public decimal Price { get; set; }
-    // Створюєм Властивості Technique та Category, які визначаються на основі інших властивостей
-    public string Technique
-    {
-        get
-        {
-            return Region switch
-            {
-                "Полтава" => "Вишивка біллю (білим по білому)",
-                "Гуцульщина" => "Низинка або кучерявий шов",
-                "Сучасний" => "Машинна вишивка або принт",
-                _ => "Техніка обирається майстром"
-            };
-        }
-    }
-    public string Category
-    {
-        get
-        {   //Кортежі в switch: Твоя конструкція— це дуже сучасний C# (Pattern Matching).
-            return (ItemType, Material) switch 
-            {
-                ("Одяг", "Льон") => "Автентичний одяг (старовинний стиль)",
-                ("Одяг", _) => "Сучасний текстильний виріб",
-                ("Посуд", "Глина") => "Кераміка ручної роботи",
-                _ => "Категорія не визначена"
-            };
-        }
-    }
-    public void DisplayInfo()
-    {
-        Console.WriteLine("\n╔═══════════════════════════════════════╗");
-        Console.WriteLine("║      ВАШЕ ЗАМОВЛЕННЯ                 ║");
-        Console.WriteLine("╚═══════════════════════════════════════╝");
-        Console.WriteLine($"Тип виробу:   {ItemType}");
-        Console.WriteLine($"Матеріал:     {Material}");
-        Console.WriteLine($"Регіон:       {Region}");
-        Console.WriteLine($"Техніка:      {Technique}");  
-        Console.WriteLine($"Категорія:    {Category}");   
-        Console.WriteLine($"Термін:       {Days} днів");
-        Console.WriteLine($"Ціна:         {Price:C}");
-        Console.WriteLine("═══════════════════════════════════════\n");
-    }
-
-    public Order(string itemType, string material, string region, int days, decimal price)
-    {
-        ItemType = itemType;
-        Material = material;
-        Region = region;
-        Days = days;
-        Price = price;
     }
 }
