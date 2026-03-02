@@ -51,7 +51,7 @@ while (true)
         }
         else
         {
-            Console.WriteLine("❌Будь ласка, введіть 'так' або 'ні'.");
+            Console.WriteLine("❌ Будь ласка, введіть 'так' або 'ні'.");
         }
     }
 
