@@ -6,6 +6,11 @@ namespace Task1_HandmadeWorkshop
 {
     public class Order
     {
+        private const int UrgentDaysThreshold = 5;
+        private const decimal UrgentPriceMultiplier = 1.2m;
+        public const int MinDays = 1;
+        public const int MaxDays = 365;
+
         public string ItemType { get; set; }
         public string Material { get; set; }
         public string Region { get; set; }
@@ -46,9 +51,9 @@ namespace Task1_HandmadeWorkshop
 
         public decimal CalculateFinalPrice()
         {
-            if (Days < 5)
+            if (Days < UrgentDaysThreshold)
             {
-                return Price * 1.2m;
+                return Price * UrgentPriceMultiplier;
             }
             return Price;
         }

@@ -1,4 +1,5 @@
 ﻿// Program.cs
+using System.ComponentModel.DataAnnotations;
 using Task1_HandmadeWorkshop;
 
 // 🧵інтерактивний консольний додаток для майстрів хендмейду.
@@ -24,7 +25,7 @@ while (true)
         new[] { "Полтава", "Гуцульщина", "Сучасний", "Інше" }
     );
 
-    int days = GetValidInt("Які строки виконання роботи? Введіть кількість днів: ", 1, 365);
+    int days = GetValidInt("Які строки виконання роботи? Введіть кількість днів: ");
 
     Order myOrder = new Order(itemType, material, region, days, 2500m);
 
@@ -88,9 +89,9 @@ while (true)
         }
     }
 
-    static int GetValidInt(string prompt, int min, int max)
+    static int GetValidInt(string prompt)
     {
-        if (min > max)
+        if (Order.MinDays > Order.MaxDays)
         {
             throw new ArgumentException("Мінімальне значення не може бути більшим за максимальне!");
         }
@@ -101,13 +102,13 @@ while (true)
 
             if (int.TryParse(input, out int result))
             {
-                if (result >= min && result <= max)
+                if (result >= Order.MinDays && result <= Order.MaxDays)
                 {
                     return result;
                 }
                 else
                 {
-                    Console.WriteLine($"❌ Помилка: введіть число в межах від {min} до {max}.");
+                    Console.WriteLine($"❌ Помилка: введіть число в межах від {Order.MinDays} до {Order.MaxDays}.");
                 }
             }
             else
