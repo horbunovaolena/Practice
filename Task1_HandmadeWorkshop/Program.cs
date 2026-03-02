@@ -38,7 +38,7 @@ while (true)
     while (true)
     {
         Console.Write("Бажаєте зробити ще одне замовлення? (так / ні): ");
-        string? response = Console.ReadLine()?.Trim().ToLower();
+        string? response = Console.ReadLine()?.Trim()?.ToLower();
 
         if (response is "так" or "да" or "yes")
         {
