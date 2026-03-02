@@ -70,7 +70,7 @@ while (true)
         while (true)
         {
             Console.WriteLine(prompt);
-            string? input = Console.ReadLine()?.Trim().Replace(" ", "");
+            string? input = Console.ReadLine()?.Trim()?.Replace(" ", "");
 
             if (string.IsNullOrEmpty(input))
             {
