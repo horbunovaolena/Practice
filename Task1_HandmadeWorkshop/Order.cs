@@ -41,9 +41,17 @@ namespace Task1_HandmadeWorkshop
 Техніка:      {Technique}
 Категорія:    {Category}
 Термін:       {Days} днів
-Ціна:         {Price:C}";
+Ціна:         {CalculateFinalPrice():C}";
         }
 
+        public decimal CalculateFinalPrice()
+        {
+            if (Days < 5)
+            {
+                return Price * 1.2m;
+            }
+            return Price;
+        }
         public Order(string itemType, string material, string region, int days, decimal price)
         {
             ItemType = itemType;
