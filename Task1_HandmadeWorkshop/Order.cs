@@ -6,6 +6,11 @@ namespace Task1_HandmadeWorkshop
 {
     public class Order
     {
+        private const int UrgentDaysThreshold = 5;
+        private const decimal UrgentPriceMultiplier = 1.2m;
+        public const int MinDays = 1;
+        public const int MaxDays = 365;
+
         public string ItemType { get; set; }
         public string Material { get; set; }
         public string Region { get; set; }
@@ -41,9 +46,17 @@ namespace Task1_HandmadeWorkshop
 Техніка:      {Technique}
 Категорія:    {Category}
 Термін:       {Days} днів
-Ціна:         {Price:C}";
+Ціна:         {CalculateFinalPrice():C}";
         }
 
+        public decimal CalculateFinalPrice()
+        {
+            if (Days < UrgentDaysThreshold)
+            {
+                return Price * UrgentPriceMultiplier;
+            }
+            return Price;
+        }
         public Order(string itemType, string material, string region, int days, decimal price)
         {
             ItemType = itemType;

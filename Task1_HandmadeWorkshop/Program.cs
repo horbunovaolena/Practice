@@ -1,4 +1,5 @@
 ﻿// Program.cs
+using System.ComponentModel.DataAnnotations;
 using Task1_HandmadeWorkshop;
 
 // 🧵інтерактивний консольний додаток для майстрів хендмейду.
@@ -7,84 +8,112 @@ Console.InputEncoding = System.Text.Encoding.UTF8;
 
 ShowLogo();
 
-string itemType = GetValidInput(
+List<Order> orders = new List<Order>();
+
+while (true)
+{
+    string itemType = GetValidInput(
     "Будь ласка, введіть тип виробу (Одяг/Посуд/Інше):",
-    new[] { "Одяг", "Посуд", "Інше" }
-);
+    new[] { "Одяг", "Посуд", "Інше" });
 
-string material = GetValidInput(
-    "Будь ласка, введіть назву матеріалу (Льон/Глина/Пластик/Інше):",
-    new[] { "Льон", "Глина", "Пластик", "Інше" }
-);
+    string material = GetValidInput
+            ("Будь ласка, введіть назву матеріалу (Льон/Глина/Пластик/Інше):",
+        new[] { "Льон", "Глина", "Пластик", "Інше" });
 
-string region = GetValidInput(
-    "Будь ласка, введіть регіон (Полтава/Гуцульщина/Сучасний/Інше):",
-    new[] { "Полтава", "Гуцульщина", "Сучасний", "Інше" }
-);
+    string region = GetValidInput(
+        "Будь ласка, введіть регіон (Полтава/Гуцульщина/Сучасний/Інше):",
+        new[] { "Полтава", "Гуцульщина", "Сучасний", "Інше" }
+    );
 
-int days = GetValidInt("Які строки виконання роботи? Введіть кількість днів: ", 1, 365);
+    int days = GetValidInt("Які строки виконання роботи? Введіть кількість днів: ");
 
-Order myOrder = new Order(itemType, material, region, days, 2500m);
+    Order myOrder = new Order(itemType, material, region, days, 2500m);
 
-Console.WriteLine(myOrder);
+    Console.WriteLine(myOrder);
+    orders.Add(myOrder);
+    Console.WriteLine("\n✅ Ваше замовлення прийнято!\n");
 
-// --- МЕТОДИ ---
-static void ShowLogo()
-{
-    Console.WriteLine("╔═══════════════════════════════════════╗");
-    Console.WriteLine("║    ETNO-STYLE WORKSHOP 🧵             ║");
-    Console.WriteLine("╚═══════════════════════════════════════╝\n");
-}
+    bool shouldExit = false;
 
-static string GetValidInput(string prompt, string[] validOptions)
-{
     while (true)
     {
-        Console.WriteLine(prompt);
-        string? input = Console.ReadLine()?.Trim().Replace(" ", "");
+        Console.Write("Бажаєте зробити ще одне замовлення? (так / ні): ");
+        string? response = Console.ReadLine()?.Trim()?.ToLower();
 
-        if (string.IsNullOrEmpty(input))
+        if (response is "так" or "да" or "yes")
         {
-            Console.WriteLine("❌ Ви нічого не ввели. Спробуйте ще раз.");
-            continue;
+            break;
         }
-
-        input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
-
-        foreach (string option in validOptions)
+        else if (response is "ні" or "нет" or "no")
         {
-            if (input == option) return input;
-        }
-
-        Console.WriteLine("❌ Помилка. Оберіть варіант зі списку.");
-    }
-}
-
-static int GetValidInt(string prompt, int min, int max)
-{
-    if (min > max)
-    {
-        throw new ArgumentException("Мінімальне значення не може бути більшим за максимальне!");
-    }
-    while (true)
-    {
-        Console.WriteLine(prompt);
-        string? input = Console.ReadLine()?.Trim();
-
-        if (int.TryParse(input, out int result))
-        {
-            if (result >= min && result <= max)
-            {
-                return result;
-            }
-            else
-            {
-                Console.WriteLine($"❌ Помилка: введіть число в межах від {min} до {max}.");
-            }
+            shouldExit = true;
+            break;
         }
         else
         {
-            Console.WriteLine("❌ Це не число. Спробуйте ще раз.");
+            Console.WriteLine("❌ Будь ласка, введіть 'так' або 'ні'.");
         }
     }
+
+    if (shouldExit) break;
 }
+
+    static void ShowLogo()
+    {
+        Console.WriteLine("╔═══════════════════════════════════════╗");
+        Console.WriteLine("║    ETNO-STYLE WORKSHOP 🧵             ║");
+        Console.WriteLine("╚═══════════════════════════════════════╝\n");
+    }
+
+    static string GetValidInput(string prompt, string[] validOptions)
+    {
+        while (true)
+        {
+            Console.WriteLine(prompt);
+            string? input = Console.ReadLine()?.Trim()?.Replace(" ", "");
+
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("❌ Ви нічого не ввели. Спробуйте ще раз.");
+                continue;
+            }
+
+            input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
+
+            foreach (string option in validOptions)
+            {
+                if (input == option) return input;
+            }
+
+            Console.WriteLine("❌ Помилка. Оберіть варіант зі списку.");
+        }
+    }
+
+    static int GetValidInt(string prompt)
+    {
+        if (Order.MinDays > Order.MaxDays)
+        {
+            throw new ArgumentException("Мінімальне значення не може бути більшим за максимальне!");
+        }
+        while (true)
+        {
+            Console.WriteLine(prompt);
+            string? input = Console.ReadLine()?.Trim();
+
+            if (int.TryParse(input, out int result))
+            {
+                if (result >= Order.MinDays && result <= Order.MaxDays)
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine($"❌ Помилка: введіть число в межах від {Order.MinDays} до {Order.MaxDays}.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("❌ Це не число. Спробуйте ще раз.");
+            }
+        }
+    }
