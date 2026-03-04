@@ -1,5 +1,6 @@
 ﻿// Program.cs
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Task1_HandmadeWorkshop;
 
 // 🧵інтерактивний консольний додаток для майстрів хендмейду.
@@ -65,6 +66,25 @@ while (true)
     }
 
     if (shouldExit) break;
+}
+
+Console.WriteLine("\nАналітика майстерні за день");
+if (orders.Any())
+{
+    decimal totalRevenue = orders.Sum(o => o.CalculateFinalPrice());
+    decimal maxPrice = orders.Max(o => o.CalculateFinalPrice());
+    decimal averagePrice = orders.Average(o => o.CalculateFinalPrice());
+    int urgentCount = orders.Count(o => o.Days < Order.UrgentDaysThreshold);
+
+    Console.WriteLine($"✅ Всього замовлень: {orders.Count}");
+    Console.WriteLine($"💰 Загальна виручка: {totalRevenue:C}");
+    Console.WriteLine($"📈 Найвищий чек: {maxPrice:C}");
+    Console.WriteLine($"⚖️ Середня вартість: {averagePrice:C}");
+    Console.WriteLine($"🔥 Термінових замовлень: {urgentCount}");
+}
+else
+{
+    Console.WriteLine("Замовлень сьогодні не було.");
 }
 
 static void ShowLogo()

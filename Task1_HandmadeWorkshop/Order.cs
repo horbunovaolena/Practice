@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Task1_HandmadeWorkshop
 {
     public class Order
     {
-        private const int UrgentDaysThreshold = 5;
+        public const int UrgentDaysThreshold = 5;
         private const decimal UrgentPriceMultiplier = 1.2m;
         public const int MinDays = 1;
         public const int MaxDays = 365;
