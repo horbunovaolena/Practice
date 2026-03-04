@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Task1_HandmadeWorkshop
 {
     public class Order
     {
-        private const int UrgentDaysThreshold = 5;
+        public const int UrgentDaysThreshold = 5;
         private const decimal UrgentPriceMultiplier = 1.2m;
         public const int MinDays = 1;
         public const int MaxDays = 365;
@@ -18,21 +19,21 @@ namespace Task1_HandmadeWorkshop
         public decimal Price { get; set; }
 
         public string Technique => Region switch
-               {
-               
-                "Полтава" => "Вишивка біллю (білим по білому)",
-                "Гуцульщина" => "Низинка або кучерявий шов",
-                "Сучасний" => "Машинна вишивка або принт",
-                    _ => "Техніка обирається майстром"
-               };
-        
+        {
+
+            "Полтава" => "Вишивка біллю (білим по білому)",
+            "Гуцульщина" => "Низинка або кучерявий шов",
+            "Сучасний" => "Машинна вишивка або принт",
+            _ => "Техніка обирається майстром"
+        };
+
         public string Category => (ItemType, Material) switch
-                {
-                    ("Одяг", "Льон") => "Автентичний одяг (старовинний стиль)",
-                    ("Одяг", _) => "Сучасний текстильний виріб",
-                    ("Посуд", "Глина") => "Кераміка ручної роботи",
-                    _ => "Категорія не визначена"
-                };
+        {
+            ("Одяг", "Льон") => "Автентичний одяг (старовинний стиль)",
+            ("Одяг", _) => "Сучасний текстильний виріб",
+            ("Посуд", "Глина") => "Кераміка ручної роботи",
+            _ => "Категорія не визначена"
+        };
 
         public override string ToString()
         {

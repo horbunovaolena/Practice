@@ -1,5 +1,6 @@
 ﻿// Program.cs
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Task1_HandmadeWorkshop;
 
 // 🧵інтерактивний консольний додаток для майстрів хендмейду.
@@ -7,6 +8,13 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 Console.InputEncoding = System.Text.Encoding.UTF8;
 
 ShowLogo();
+
+Dictionary<string, decimal> priceList = new Dictionary<string, decimal>
+{
+    { "Одяг", 2500m },
+    { "Посуд", 1500m },
+    { "Інше", 1000m  }
+};
 
 List<Order> orders = new List<Order>();
 
@@ -27,7 +35,9 @@ while (true)
 
     int days = GetValidInt("Які строки виконання роботи? Введіть кількість днів: ");
 
-    Order myOrder = new Order(itemType, material, region, days, 2500m);
+    decimal basePrice = priceList[itemType];
+
+    Order myOrder = new Order(itemType, material, region, days, basePrice);
 
     Console.WriteLine(myOrder);
     orders.Add(myOrder);
@@ -58,62 +68,81 @@ while (true)
     if (shouldExit) break;
 }
 
-    static void ShowLogo()
-    {
-        Console.WriteLine("╔═══════════════════════════════════════╗");
-        Console.WriteLine("║    ETNO-STYLE WORKSHOP 🧵             ║");
-        Console.WriteLine("╚═══════════════════════════════════════╝\n");
-    }
+Console.WriteLine("\nАналітика майстерні за день");
+if (orders.Any())
+{
+    decimal totalRevenue = orders.Sum(o => o.CalculateFinalPrice());
+    decimal maxPrice = orders.Max(o => o.CalculateFinalPrice());
+    decimal averagePrice = orders.Average(o => o.CalculateFinalPrice());
+    int urgentCount = orders.Count(o => o.Days < Order.UrgentDaysThreshold);
 
-    static string GetValidInput(string prompt, string[] validOptions)
+    Console.WriteLine($"✅ Всього замовлень: {orders.Count}");
+    Console.WriteLine($"💰 Загальна виручка: {totalRevenue:C}");
+    Console.WriteLine($"📈 Найвищий чек: {maxPrice:C}");
+    Console.WriteLine($"⚖️ Середня вартість: {averagePrice:C}");
+    Console.WriteLine($"🔥 Термінових замовлень: {urgentCount}");
+}
+else
+{
+    Console.WriteLine("Замовлень сьогодні не було.");
+}
+
+static void ShowLogo()
+{
+    Console.WriteLine("╔═══════════════════════════════════════╗");
+    Console.WriteLine("║    ETNO-STYLE WORKSHOP 🧵             ║");
+    Console.WriteLine("╚═══════════════════════════════════════╝\n");
+}
+
+static string GetValidInput(string prompt, string[] validOptions)
+{
+    while (true)
     {
-        while (true)
+        Console.WriteLine(prompt);
+        string? input = Console.ReadLine()?.Trim()?.Replace(" ", "");
+
+        if (string.IsNullOrEmpty(input))
         {
-            Console.WriteLine(prompt);
-            string? input = Console.ReadLine()?.Trim()?.Replace(" ", "");
-
-            if (string.IsNullOrEmpty(input))
-            {
-                Console.WriteLine("❌ Ви нічого не ввели. Спробуйте ще раз.");
-                continue;
-            }
-
-            input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
-
-            foreach (string option in validOptions)
-            {
-                if (input == option) return input;
-            }
-
-            Console.WriteLine("❌ Помилка. Оберіть варіант зі списку.");
+            Console.WriteLine("❌ Ви нічого не ввели. Спробуйте ще раз.");
+            continue;
         }
-    }
 
-    static int GetValidInt(string prompt)
-    {
-        if (Order.MinDays > Order.MaxDays)
+        input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
+
+        foreach (string option in validOptions)
         {
-            throw new ArgumentException("Мінімальне значення не може бути більшим за максимальне!");
+            if (input == option) return input;
         }
-        while (true)
-        {
-            Console.WriteLine(prompt);
-            string? input = Console.ReadLine()?.Trim();
 
-            if (int.TryParse(input, out int result))
+        Console.WriteLine("❌ Помилка. Оберіть варіант зі списку.");
+    }
+}
+
+static int GetValidInt(string prompt)
+{
+    if (Order.MinDays > Order.MaxDays)
+    {
+        throw new ArgumentException("Мінімальне значення не може бути більшим за максимальне!");
+    }
+    while (true)
+    {
+        Console.WriteLine(prompt);
+        string? input = Console.ReadLine()?.Trim();
+
+        if (int.TryParse(input, out int result))
+        {
+            if (result >= Order.MinDays && result <= Order.MaxDays)
             {
-                if (result >= Order.MinDays && result <= Order.MaxDays)
-                {
-                    return result;
-                }
-                else
-                {
-                    Console.WriteLine($"❌ Помилка: введіть число в межах від {Order.MinDays} до {Order.MaxDays}.");
-                }
+                return result;
             }
             else
             {
-                Console.WriteLine("❌ Це не число. Спробуйте ще раз.");
+                Console.WriteLine($"❌ Помилка: введіть число в межах від {Order.MinDays} до {Order.MaxDays}.");
             }
         }
+        else
+        {
+            Console.WriteLine("❌ Це не число. Спробуйте ще раз.");
+        }
     }
+}
