@@ -13,8 +13,9 @@ namespace Task1_HandmadeWorkshop
         public override decimal CalculateFinalPrice()
         {
             decimal price = BasePrice;
-            if (Material == "Льон")
+            if (Material == "Льон" || Material == "Шовк")
                 price *= 1.1m;
+            else if (Material == "Бавовна" || Material == "Інше")
             if (Days < UrgentDaysThreshold)
                 price *= UrgentPriceMultiplier;
             return price;
@@ -22,10 +23,10 @@ namespace Task1_HandmadeWorkshop
 
         public override string ToString()
         {
-            return base.ToString() + $"\nРозмір:       {Size}";
+            return base.ToString() + $"\nРозмір: {Size}";
         }
 
-        public string GetExportString()
+        public string GetLabel()
         {
             return $"[ОДЯГ] {Material} | {Region} | Розмір: {Size} | {CalculateFinalPrice():C}";
         }

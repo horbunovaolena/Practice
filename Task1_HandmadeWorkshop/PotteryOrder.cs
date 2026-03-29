@@ -28,7 +28,7 @@ namespace Task1_HandmadeWorkshop
                                                              //потім додаємо своє — об'єм
         }
 
-        public string GetExportString() //Виконуємо зобов'язання інтерфейсу IExportable — повертаємо рядок для етикетки
+        public string GetLabel() //Виконуємо зобов'язання інтерфейсу IExportable — повертаємо рядок для етикетки
         {
             return $"[ПОСУД] {Material} | {Region} | Об'єм: {Volume} л | {CalculateFinalPrice():C}";
         }

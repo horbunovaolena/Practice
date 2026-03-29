@@ -106,7 +106,7 @@ if (orders.Any())
     foreach (Order o in orders)
     {
         if (o is IExportable exportable)
-            Console.WriteLine(exportable.GetExportString());
+            Console.WriteLine(exportable.GetLabel());
     }
 }
 else
