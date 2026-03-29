@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace Task1_HandmadeWorkshop
 {
-    public class Order
+    public abstract class Order
     {
         public const int UrgentDaysThreshold = 5;
-        private const decimal UrgentPriceMultiplier = 1.2m;
+        protected const decimal UrgentPriceMultiplier = 1.2m;
         public const int MinDays = 1;
         public const int MaxDays = 365;
 
@@ -16,23 +16,29 @@ namespace Task1_HandmadeWorkshop
         public string Material { get; set; }
         public string Region { get; set; }
         public int Days { get; set; }
-        public decimal Price { get; set; }
+        public decimal BasePrice { get; set; }
 
-        public string Technique => Region switch
+        public string Technique => (ItemType, Region) switch
         {
-
-            "Полтава" => "Вишивка біллю (білим по білому)",
-            "Гуцульщина" => "Низинка або кучерявий шов",
-            "Сучасний" => "Машинна вишивка або принт",
-            _ => "Техніка обирається майстром"
+            ("Одяг", "Полтава")    => "Вишивка біллю (білим по білому)",
+            ("Одяг", "Гуцульщина") => "Низинка або кучерявий шов",
+            ("Одяг", "Сучасний")   => "Машинна вишивка або принт",
+            ("Посуд", "Полтава")   => "Розпис у полтавському стилі",
+            ("Посуд", "Гуцульщина")=> "Гуцульська кераміка (орнамент)",
+            ("Посуд", "Сучасний")  => "Глазурування та обпалення",
+            _                      => "Техніка обирається майстром"
         };
 
         public string Category => (ItemType, Material) switch
         {
-            ("Одяг", "Льон") => "Автентичний одяг (старовинний стиль)",
-            ("Одяг", _) => "Сучасний текстильний виріб",
-            ("Посуд", "Глина") => "Кераміка ручної роботи",
-            _ => "Категорія не визначена"
+            ("Одяг", "Льон")        => "Автентичний одяг (старовинний стиль)",
+            ("Одяг", "Шовк")        => "Святковий одяг",
+            ("Одяг", "Бавовна")     => "Повсякденний текстильний виріб",
+            ("Одяг", _)             => "Сучасний текстильний виріб",
+            ("Посуд", "Глина")      => "Кераміка ручної роботи",
+            ("Посуд", "Фаянс")      => "Фаянсовий посуд",
+            ("Посуд", "Порцеляна")  => "Порцеляновий посуд",
+            _                       => "Категорія не визначена"
         };
 
         public override string ToString()
@@ -41,7 +47,7 @@ namespace Task1_HandmadeWorkshop
 ╔═══════════════════════════════════════╗
 ║      ВАШЕ ЗАМОВЛЕННЯ                  ║
 ╚═══════════════════════════════════════╝
-Тип виробу:   {ItemType}
+Тип:          {ItemType}   
 Матеріал:     {Material}
 Регіон:       {Region}
 Техніка:      {Technique}
@@ -50,21 +56,15 @@ namespace Task1_HandmadeWorkshop
 Ціна:         {CalculateFinalPrice():C}";
         }
 
-        public decimal CalculateFinalPrice()
-        {
-            if (Days < UrgentDaysThreshold)
-            {
-                return Price * UrgentPriceMultiplier;
-            }
-            return Price;
-        }
-        public Order(string itemType, string material, string region, int days, decimal price)
+        public abstract decimal CalculateFinalPrice();
+      
+        protected Order(string itemType, string material, string region, int days, decimal basePrice)
         {
             ItemType = itemType;
             Material = material;
             Region = region;
             Days = days;
-            Price = price;
+            BasePrice = basePrice;
         }
     }
 }
