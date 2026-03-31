@@ -12,42 +12,47 @@ namespace Task1_HandmadeWorkshop
         public const int MinDays = 1;
         public const int MaxDays = 365;
 
-        public string ItemType { get; set; }
         public string Material { get; set; }
         public string Region { get; set; }
         public int Days { get; set; }
         public decimal BasePrice { get; set; }
 
-        public string Technique => (ItemType, Region) switch
+        public string Technique => (this, Region) switch // this — це сам об'єкт, C# дивиться на його ТИП (ClothingOrder або PotteryOrder)
         {
-            ("Одяг", "Полтава")    => "Вишивка біллю (білим по білому)",
-            ("Одяг", "Гуцульщина") => "Низинка або кучерявий шов",
-            ("Одяг", "Сучасний")   => "Машинна вишивка або принт",
-            ("Посуд", "Полтава")   => "Розпис у полтавському стилі",
-            ("Посуд", "Гуцульщина")=> "Гуцульська кераміка (орнамент)",
-            ("Посуд", "Сучасний")  => "Глазурування та обпалення",
+            (ClothingOrder, "Полтава")    => "Вишивка біллю (білим по білому)",
+            (ClothingOrder, "Гуцульщина") => "Низинка або кучерявий шов",
+            (ClothingOrder, "Сучасний")   => "Машинна вишивка або принт",
+            (PotteryOrder, "Полтава")     => "Розпис у полтавському стилі",
+            (PotteryOrder, "Гуцульщина")  => "Гуцульська кераміка (орнамент)",
+            (PotteryOrder, "Сучасний")    => "Глазурування та обпалення",
             _                      => "Техніка обирається майстром"
         };
 
-        public string Category => (ItemType, Material) switch
+        public string Category => (this, Material) switch
         {
-            ("Одяг", "Льон")        => "Автентичний одяг (старовинний стиль)",
-            ("Одяг", "Шовк")        => "Святковий одяг",
-            ("Одяг", "Бавовна")     => "Повсякденний текстильний виріб",
-            ("Одяг", _)             => "Сучасний текстильний виріб",
-            ("Посуд", "Глина")      => "Кераміка ручної роботи",
-            ("Посуд", "Фаянс")      => "Фаянсовий посуд",
-            ("Посуд", "Порцеляна")  => "Порцеляновий посуд",
+            (ClothingOrder, "Льон")        => "Автентичний одяг (старовинний стиль)",
+            (ClothingOrder, "Шовк")        => "Святковий одяг",
+            (ClothingOrder, "Бавовна")     => "Повсякденний текстильний виріб",
+            (ClothingOrder, _)             => "Сучасний текстильний виріб",
+            (PotteryOrder, "Глина")      => "Кераміка ручної роботи",
+            (PotteryOrder, "Фаянс")      => "Фаянсовий посуд",
+            (PotteryOrder, "Порцеляна")  => "Порцеляновий посуд",
             _                       => "Категорія не визначена"
         };
 
         public override string ToString()
         {
+        string displayType = this switch
+          {
+              ClothingOrder => "Одяг",
+              PotteryOrder => "Посуд",
+            _            => "Невідомий тип"
+          };
             return $@"
 ╔═══════════════════════════════════════╗
 ║      ВАШЕ ЗАМОВЛЕННЯ                  ║
 ╚═══════════════════════════════════════╝
-Тип:          {ItemType}   
+Тип:          {displayType}   
 Матеріал:     {Material}
 Регіон:       {Region}
 Техніка:      {Technique}
@@ -58,9 +63,8 @@ namespace Task1_HandmadeWorkshop
 
         public abstract decimal CalculateFinalPrice();
       
-        protected Order(string itemType, string material, string region, int days, decimal basePrice)
+        protected Order(string material, string region, int days, decimal basePrice)
         {
-            ItemType = itemType;
             Material = material;
             Region = region;
             Days = days;

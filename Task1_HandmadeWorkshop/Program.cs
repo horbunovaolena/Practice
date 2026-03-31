@@ -23,6 +23,7 @@ while (true)
     "Будь ласка, введіть тип виробу (Одяг/Посуд):",
     new[] { "Одяг", "Посуд" });
 
+ї= 
     string material;
     if (itemType == "Одяг")
     {
@@ -45,7 +46,7 @@ while (true)
 
     decimal basePrice = priceList[itemType];
 
-    Order myOrder; //Тип змінної Order — бо нам потрібно в одну змінну покласти або одяг, або посуд
+    Order myOrder;
     if (itemType == "Одяг")
     {
         string size = GetValidInput(
