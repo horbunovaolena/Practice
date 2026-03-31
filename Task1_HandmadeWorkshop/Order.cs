@@ -43,11 +43,11 @@ namespace Task1_HandmadeWorkshop
         public override string ToString()
         {
         string displayType = this switch
-        {
-            ClothingOrder => "Одяг",
-            PotteryOrder => "Посуд",
+          {
+              ClothingOrder => "Одяг",
+              PotteryOrder => "Посуд",
             _            => "Невідомий тип"
-        };
+          };
             return $@"
 ╔═══════════════════════════════════════╗
 ║      ВАШЕ ЗАМОВЛЕННЯ                  ║

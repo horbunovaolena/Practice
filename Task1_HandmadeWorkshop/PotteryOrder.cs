@@ -7,7 +7,7 @@ namespace Task1_HandmadeWorkshop
         public decimal Volume { get; set; } //Своя властивість — об'єм посуду в літрах
 
         public PotteryOrder(string material, string region, int days, decimal basePrice, decimal volume)
-            : base( material, region, days, basePrice)
+            : base(material, region, days, basePrice)
         {
             Volume = volume;
         }
