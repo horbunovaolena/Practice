@@ -42,15 +42,15 @@ namespace Task1_HandmadeWorkshop.Tests
         [InlineData("Полтава", "Вишивка біллю (білим по білому)")]
         [InlineData("Гуцульщина", "Низинка або кучерявий шов")]
         [InlineData("Сучасний", "Машинна вишивка або принт")]
-        [InlineData("Київ", "Техніка обирається майстром")] // Дефолтний випадок (_)
+        [InlineData("_", "Техніка обирається майстром")] // Дефолтний випадок (_)
         public void Technique_ShouldReturnCorrectValue_BasedOnRegion(string region, string expectedTechnique)
         {
-            // Arrange
             var order = new ClothingOrder("Бавовна", region, 7, 1000m, "L");
 
             // Act & Assert
             Assert.Equal(expectedTechnique, order.Technique);
         }
+
         [Theory]
         [InlineData("Льон", "Автентичний одяг (старовинний стиль)")]
         [InlineData("Шовк", "Святковий одяг")]
