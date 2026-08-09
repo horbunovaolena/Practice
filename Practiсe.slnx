@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="Task1_HandmadeWorkshop.Tests/Task1_HandmadeWorkshop.Tests.csproj" Id="41a301ff-54ca-4579-97f9-023f69515e84" />
   <Project Path="Task1_HandmadeWorkshop/Task1_HandmadeWorkshop.csproj" />
   <Project Path="Task2_TagAnalyzer/Task2_TagAnalyzer.csproj" />
   <Project Path="Task3_Accounting/Task3_Accounting.csproj" Id="fe373051-ae4b-4620-b29a-ce2198d21f43" />
