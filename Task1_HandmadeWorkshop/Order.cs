@@ -17,7 +17,7 @@ namespace Task1_HandmadeWorkshop
         public int Days { get; set; }
         public decimal BasePrice { get; set; }
 
-        public string Technique => (this, Region) switch // this — це сам об'єкт, C# дивиться на його ТИП (ClothingOrder або PotteryOrder)
+        public string Technique => (this, Region) switch //властивість поточного об'єкта; C# дивиться на його ТИП (ClothingOrder або PotteryOrder)
         {
             (ClothingOrder, "Полтава")    => "Вишивка біллю (білим по білому)",
             (ClothingOrder, "Гуцульщина") => "Низинка або кучерявий шов",
@@ -58,7 +58,7 @@ namespace Task1_HandmadeWorkshop
 Техніка:      {Technique}
 Категорія:    {Category}
 Термін:       {Days} днів
-Ціна:         {CalculateFinalPrice():C}";
+Ціна:         {CalculateFinalPrice():C}"; //Форматизатор "C" (Currency) перетворює число у грошовий формат
         }
 
         public abstract decimal CalculateFinalPrice();
